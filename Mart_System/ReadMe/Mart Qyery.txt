@@ -1,0 +1,50 @@
+------------------------------Item Table Query-----------------------------
+
+CREATE TABLE [dbo].[item_tbl] (
+    [item_Id]       INT          IDENTITY (1, 1) NOT NULL,
+    [item_name]     VARCHAR (50) NULL,
+    [item_price]    INT          NULL,
+    [item_discount] INT          NULL,
+    PRIMARY KEY CLUSTERED ([item_Id] ASC)
+);
+------------------------------Login Table Query-----------------------------
+CREATE TABLE [dbo].[logintbl] (
+    [Id]       INT          IDENTITY (1, 1) NOT NULL,
+    [username] VARCHAR (50) NOT NULL,
+    [password] VARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+------------------------------Order Master Table Query-----------------------------
+CREATE TABLE [dbo].[order_master] (
+    [invoice_Id] INT          NOT NULL,
+    [username]   VARCHAR (50) NOT NULL,
+    [datetime]   VARCHAR (50) NOT NULL,
+    [finalcost]  INT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([invoice_Id] ASC)
+);
+------------------------------Signup Table Query-----------------------------
+CREATE TABLE [dbo].[signup_tbl] (
+    [user_Id]  INT          IDENTITY (1, 1) NOT NULL,
+    [fullname] VARCHAR (50) NOT NULL,
+    [username] VARCHAR (50) NOT NULL,
+    [gender]   VARCHAR (50) NOT NULL,
+    [age]      INT          NOT NULL,
+    [email]    VARCHAR (50) NOT NULL,
+    [password] VARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([user_Id] ASC)
+);
+------------------------------Order Details Table Query-----------------------------
+CREATE TABLE [dbo].[order_details] (
+    [order_details_id]  INT          IDENTITY (1, 1) NOT NULL,
+    [invoice_ID]        INT          NULL,
+    [item_name]         VARCHAR (50) NOT NULL,
+    [unit_price]        INT          NOT NULL,
+    [discount_per_item] INT          NOT NULL,
+    [quantity]          INT          NOT NULL,
+    [subTotal]          INT          NOT NULL,
+    [tax]               INT          NOT NULL,
+    [totalCost]         INT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([order_details_id] ASC),
+    FOREIGN KEY ([invoice_ID]) REFERENCES [dbo].[order_master] ([invoice_Id])
+);
